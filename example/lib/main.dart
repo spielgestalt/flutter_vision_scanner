@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_vision_scanner/flutter_vision_scanner.dart';
 
 void main() {
@@ -17,7 +14,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _scanner = FlutterVisionScanner();
+  String _errorMessage;
+  String _filePath;
 
+  //Future<ScannerResult> scannerResult;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,13 +25,28 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: RaisedButton(
-            onPressed: ()async{
-              _scanner.scan(Sca)
-            },
-            child: Text('Start scan'),
-          ),
+        body: ListView(
+          children: [
+            RaisedButton(
+              onPressed: () async {
+                try {
+                  final scannerResult = await _scanner.scan();
+                  setState(() {
+                    _filePath = scannerResult.filePath;
+                  });
+                } catch (e) {
+                  setState(() {
+                    _errorMessage = '$e';
+                  });
+                }
+
+                //scannerResult = _scanner.scan();
+              },
+              child: const Text('Start scan'),
+            ),
+            if (_errorMessage != null) Text(_errorMessage),
+            if (_filePath != null) Text(_filePath)
+          ],
         ),
       ),
     );

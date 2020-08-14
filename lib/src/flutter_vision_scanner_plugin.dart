@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_vision_scanner/src/dtos/scanner_result_dto.dart';
-import 'package:flutter_vision_scanner/src/entities/scanner_options.dart';
+import 'dtos/scanner_result_dto.dart';
+import 'entities/scanner_options.dart';
 
 abstract class IVisionScanner {
   Future<ScannerResultDto> scan(ScannerOptions options);

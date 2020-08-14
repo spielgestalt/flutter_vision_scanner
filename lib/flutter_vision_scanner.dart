@@ -5,6 +5,7 @@ import 'package:flutter_vision_scanner/src/entities/scanner_options.dart';
 import 'package:flutter_vision_scanner/src/entities/scanner_result.dart';
 
 import 'src/flutter_vision_scanner_plugin.dart';
+export 'package:flutter_vision_scanner/src/entities/scanner_options.dart';
 
 class FlutterVisionScanner {
   final IVisionScanner _scanner = FlutterVisionScannerPlugin.instance();
@@ -16,10 +17,5 @@ class FlutterVisionScanner {
           const ScannerOptions(mode: ScannerMode.withOcr)}) async {
     final result = await _scanner.scan(options);
     return ScannerResult(filePath: result.filePath, ocrResults: result.ocrText);
-  }
-
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
   }
 }

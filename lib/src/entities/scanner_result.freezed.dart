@@ -13,14 +13,18 @@ class _$ScannerResultTearOff {
   const _$ScannerResultTearOff();
 
 // ignore: unused_element
-  _ScannerResult call(
-      {@required ScannerStatus scannerStatus,
-      @required String filePath,
-      String ocrResults}) {
-    return _ScannerResult(
-      scannerStatus: scannerStatus,
+  ScannerSuccess success({@required String filePath, String ocrResults}) {
+    return ScannerSuccess(
       filePath: filePath,
       ocrResults: ocrResults,
+    );
+  }
+
+// ignore: unused_element
+  ScannerFailure failure({@required String code, String message}) {
+    return ScannerFailure(
+      code: code,
+      message: message,
     );
   }
 }
@@ -29,18 +33,34 @@ class _$ScannerResultTearOff {
 const $ScannerResult = _$ScannerResultTearOff();
 
 mixin _$ScannerResult {
-  ScannerStatus get scannerStatus;
-  String get filePath;
-  String get ocrResults;
-
-  $ScannerResultCopyWith<ScannerResult> get copyWith;
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result success(String filePath, String ocrResults),
+    @required Result failure(String code, String message),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result success(String filePath, String ocrResults),
+    Result failure(String code, String message),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result success(ScannerSuccess value),
+    @required Result failure(ScannerFailure value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result success(ScannerSuccess value),
+    Result failure(ScannerFailure value),
+    @required Result orElse(),
+  });
 }
 
 abstract class $ScannerResultCopyWith<$Res> {
   factory $ScannerResultCopyWith(
           ScannerResult value, $Res Function(ScannerResult) then) =
       _$ScannerResultCopyWithImpl<$Res>;
-  $Res call({ScannerStatus scannerStatus, String filePath, String ocrResults});
 }
 
 class _$ScannerResultCopyWithImpl<$Res>
@@ -50,53 +70,31 @@ class _$ScannerResultCopyWithImpl<$Res>
   final ScannerResult _value;
   // ignore: unused_field
   final $Res Function(ScannerResult) _then;
-
-  @override
-  $Res call({
-    Object scannerStatus = freezed,
-    Object filePath = freezed,
-    Object ocrResults = freezed,
-  }) {
-    return _then(_value.copyWith(
-      scannerStatus: scannerStatus == freezed
-          ? _value.scannerStatus
-          : scannerStatus as ScannerStatus,
-      filePath: filePath == freezed ? _value.filePath : filePath as String,
-      ocrResults:
-          ocrResults == freezed ? _value.ocrResults : ocrResults as String,
-    ));
-  }
 }
 
-abstract class _$ScannerResultCopyWith<$Res>
-    implements $ScannerResultCopyWith<$Res> {
-  factory _$ScannerResultCopyWith(
-          _ScannerResult value, $Res Function(_ScannerResult) then) =
-      __$ScannerResultCopyWithImpl<$Res>;
-  @override
-  $Res call({ScannerStatus scannerStatus, String filePath, String ocrResults});
+abstract class $ScannerSuccessCopyWith<$Res> {
+  factory $ScannerSuccessCopyWith(
+          ScannerSuccess value, $Res Function(ScannerSuccess) then) =
+      _$ScannerSuccessCopyWithImpl<$Res>;
+  $Res call({String filePath, String ocrResults});
 }
 
-class __$ScannerResultCopyWithImpl<$Res>
+class _$ScannerSuccessCopyWithImpl<$Res>
     extends _$ScannerResultCopyWithImpl<$Res>
-    implements _$ScannerResultCopyWith<$Res> {
-  __$ScannerResultCopyWithImpl(
-      _ScannerResult _value, $Res Function(_ScannerResult) _then)
-      : super(_value, (v) => _then(v as _ScannerResult));
+    implements $ScannerSuccessCopyWith<$Res> {
+  _$ScannerSuccessCopyWithImpl(
+      ScannerSuccess _value, $Res Function(ScannerSuccess) _then)
+      : super(_value, (v) => _then(v as ScannerSuccess));
 
   @override
-  _ScannerResult get _value => super._value as _ScannerResult;
+  ScannerSuccess get _value => super._value as ScannerSuccess;
 
   @override
   $Res call({
-    Object scannerStatus = freezed,
     Object filePath = freezed,
     Object ocrResults = freezed,
   }) {
-    return _then(_ScannerResult(
-      scannerStatus: scannerStatus == freezed
-          ? _value.scannerStatus
-          : scannerStatus as ScannerStatus,
+    return _then(ScannerSuccess(
       filePath: filePath == freezed ? _value.filePath : filePath as String,
       ocrResults:
           ocrResults == freezed ? _value.ocrResults : ocrResults as String,
@@ -104,14 +102,10 @@ class __$ScannerResultCopyWithImpl<$Res>
   }
 }
 
-class _$_ScannerResult implements _ScannerResult {
-  _$_ScannerResult(
-      {@required this.scannerStatus, @required this.filePath, this.ocrResults})
-      : assert(scannerStatus != null),
-        assert(filePath != null);
+class _$ScannerSuccess implements ScannerSuccess {
+  _$ScannerSuccess({@required this.filePath, this.ocrResults})
+      : assert(filePath != null);
 
-  @override
-  final ScannerStatus scannerStatus;
   @override
   final String filePath;
   @override
@@ -119,16 +113,13 @@ class _$_ScannerResult implements _ScannerResult {
 
   @override
   String toString() {
-    return 'ScannerResult(scannerStatus: $scannerStatus, filePath: $filePath, ocrResults: $ocrResults)';
+    return 'ScannerResult.success(filePath: $filePath, ocrResults: $ocrResults)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ScannerResult &&
-            (identical(other.scannerStatus, scannerStatus) ||
-                const DeepCollectionEquality()
-                    .equals(other.scannerStatus, scannerStatus)) &&
+        (other is ScannerSuccess &&
             (identical(other.filePath, filePath) ||
                 const DeepCollectionEquality()
                     .equals(other.filePath, filePath)) &&
@@ -140,27 +131,191 @@ class _$_ScannerResult implements _ScannerResult {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(scannerStatus) ^
       const DeepCollectionEquality().hash(filePath) ^
       const DeepCollectionEquality().hash(ocrResults);
 
   @override
-  _$ScannerResultCopyWith<_ScannerResult> get copyWith =>
-      __$ScannerResultCopyWithImpl<_ScannerResult>(this, _$identity);
+  $ScannerSuccessCopyWith<ScannerSuccess> get copyWith =>
+      _$ScannerSuccessCopyWithImpl<ScannerSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result success(String filePath, String ocrResults),
+    @required Result failure(String code, String message),
+  }) {
+    assert(success != null);
+    assert(failure != null);
+    return success(filePath, ocrResults);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result success(String filePath, String ocrResults),
+    Result failure(String code, String message),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (success != null) {
+      return success(filePath, ocrResults);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result success(ScannerSuccess value),
+    @required Result failure(ScannerFailure value),
+  }) {
+    assert(success != null);
+    assert(failure != null);
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result success(ScannerSuccess value),
+    Result failure(ScannerFailure value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _ScannerResult implements ScannerResult {
-  factory _ScannerResult(
-      {@required ScannerStatus scannerStatus,
-      @required String filePath,
-      String ocrResults}) = _$_ScannerResult;
+abstract class ScannerSuccess implements ScannerResult {
+  factory ScannerSuccess({@required String filePath, String ocrResults}) =
+      _$ScannerSuccess;
+
+  String get filePath;
+  String get ocrResults;
+  $ScannerSuccessCopyWith<ScannerSuccess> get copyWith;
+}
+
+abstract class $ScannerFailureCopyWith<$Res> {
+  factory $ScannerFailureCopyWith(
+          ScannerFailure value, $Res Function(ScannerFailure) then) =
+      _$ScannerFailureCopyWithImpl<$Res>;
+  $Res call({String code, String message});
+}
+
+class _$ScannerFailureCopyWithImpl<$Res>
+    extends _$ScannerResultCopyWithImpl<$Res>
+    implements $ScannerFailureCopyWith<$Res> {
+  _$ScannerFailureCopyWithImpl(
+      ScannerFailure _value, $Res Function(ScannerFailure) _then)
+      : super(_value, (v) => _then(v as ScannerFailure));
 
   @override
-  ScannerStatus get scannerStatus;
+  ScannerFailure get _value => super._value as ScannerFailure;
+
   @override
-  String get filePath;
+  $Res call({
+    Object code = freezed,
+    Object message = freezed,
+  }) {
+    return _then(ScannerFailure(
+      code: code == freezed ? _value.code : code as String,
+      message: message == freezed ? _value.message : message as String,
+    ));
+  }
+}
+
+class _$ScannerFailure implements ScannerFailure {
+  _$ScannerFailure({@required this.code, this.message}) : assert(code != null);
+
   @override
-  String get ocrResults;
+  final String code;
   @override
-  _$ScannerResultCopyWith<_ScannerResult> get copyWith;
+  final String message;
+
+  @override
+  String toString() {
+    return 'ScannerResult.failure(code: $code, message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ScannerFailure &&
+            (identical(other.code, code) ||
+                const DeepCollectionEquality().equals(other.code, code)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(message);
+
+  @override
+  $ScannerFailureCopyWith<ScannerFailure> get copyWith =>
+      _$ScannerFailureCopyWithImpl<ScannerFailure>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result success(String filePath, String ocrResults),
+    @required Result failure(String code, String message),
+  }) {
+    assert(success != null);
+    assert(failure != null);
+    return failure(code, message);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result success(String filePath, String ocrResults),
+    Result failure(String code, String message),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (failure != null) {
+      return failure(code, message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result success(ScannerSuccess value),
+    @required Result failure(ScannerFailure value),
+  }) {
+    assert(success != null);
+    assert(failure != null);
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result success(ScannerSuccess value),
+    Result failure(ScannerFailure value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ScannerFailure implements ScannerResult {
+  factory ScannerFailure({@required String code, String message}) =
+      _$ScannerFailure;
+
+  String get code;
+  String get message;
+  $ScannerFailureCopyWith<ScannerFailure> get copyWith;
 }

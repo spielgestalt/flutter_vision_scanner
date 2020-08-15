@@ -1,6 +1,6 @@
 
 struct ScannerResult: Codable{
-    let scannerStatus:ScannerStatus
+    let runtimeType:ResultType
     let filePath:String?
     let ocrText:String?
 }

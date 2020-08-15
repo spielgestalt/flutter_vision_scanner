@@ -1,1 +1,0 @@
-enum ScannerStatus { success, failure }

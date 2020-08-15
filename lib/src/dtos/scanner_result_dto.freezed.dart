@@ -17,11 +17,8 @@ class _$ScannerResultDtoTearOff {
 
 // ignore: unused_element
   _ScannerResultDto call(
-      {@required ScannerStatus scannerStatus,
-      @required String ocrText,
-      @required String filePath}) {
+      {@required String ocrText, @required String filePath}) {
     return _ScannerResultDto(
-      scannerStatus: scannerStatus,
       ocrText: ocrText,
       filePath: filePath,
     );
@@ -32,7 +29,6 @@ class _$ScannerResultDtoTearOff {
 const $ScannerResultDto = _$ScannerResultDtoTearOff();
 
 mixin _$ScannerResultDto {
-  ScannerStatus get scannerStatus;
   String get ocrText;
   String get filePath;
 
@@ -44,7 +40,7 @@ abstract class $ScannerResultDtoCopyWith<$Res> {
   factory $ScannerResultDtoCopyWith(
           ScannerResultDto value, $Res Function(ScannerResultDto) then) =
       _$ScannerResultDtoCopyWithImpl<$Res>;
-  $Res call({ScannerStatus scannerStatus, String ocrText, String filePath});
+  $Res call({String ocrText, String filePath});
 }
 
 class _$ScannerResultDtoCopyWithImpl<$Res>
@@ -57,14 +53,10 @@ class _$ScannerResultDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object scannerStatus = freezed,
     Object ocrText = freezed,
     Object filePath = freezed,
   }) {
     return _then(_value.copyWith(
-      scannerStatus: scannerStatus == freezed
-          ? _value.scannerStatus
-          : scannerStatus as ScannerStatus,
       ocrText: ocrText == freezed ? _value.ocrText : ocrText as String,
       filePath: filePath == freezed ? _value.filePath : filePath as String,
     ));
@@ -77,7 +69,7 @@ abstract class _$ScannerResultDtoCopyWith<$Res>
           _ScannerResultDto value, $Res Function(_ScannerResultDto) then) =
       __$ScannerResultDtoCopyWithImpl<$Res>;
   @override
-  $Res call({ScannerStatus scannerStatus, String ocrText, String filePath});
+  $Res call({String ocrText, String filePath});
 }
 
 class __$ScannerResultDtoCopyWithImpl<$Res>
@@ -92,14 +84,10 @@ class __$ScannerResultDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object scannerStatus = freezed,
     Object ocrText = freezed,
     Object filePath = freezed,
   }) {
     return _then(_ScannerResultDto(
-      scannerStatus: scannerStatus == freezed
-          ? _value.scannerStatus
-          : scannerStatus as ScannerStatus,
       ocrText: ocrText == freezed ? _value.ocrText : ocrText as String,
       filePath: filePath == freezed ? _value.filePath : filePath as String,
     ));
@@ -108,19 +96,13 @@ class __$ScannerResultDtoCopyWithImpl<$Res>
 
 @JsonSerializable()
 class _$_ScannerResultDto implements _ScannerResultDto {
-  _$_ScannerResultDto(
-      {@required this.scannerStatus,
-      @required this.ocrText,
-      @required this.filePath})
-      : assert(scannerStatus != null),
-        assert(ocrText != null),
+  _$_ScannerResultDto({@required this.ocrText, @required this.filePath})
+      : assert(ocrText != null),
         assert(filePath != null);
 
   factory _$_ScannerResultDto.fromJson(Map<String, dynamic> json) =>
       _$_$_ScannerResultDtoFromJson(json);
 
-  @override
-  final ScannerStatus scannerStatus;
   @override
   final String ocrText;
   @override
@@ -128,16 +110,13 @@ class _$_ScannerResultDto implements _ScannerResultDto {
 
   @override
   String toString() {
-    return 'ScannerResultDto(scannerStatus: $scannerStatus, ocrText: $ocrText, filePath: $filePath)';
+    return 'ScannerResultDto(ocrText: $ocrText, filePath: $filePath)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ScannerResultDto &&
-            (identical(other.scannerStatus, scannerStatus) ||
-                const DeepCollectionEquality()
-                    .equals(other.scannerStatus, scannerStatus)) &&
             (identical(other.ocrText, ocrText) ||
                 const DeepCollectionEquality()
                     .equals(other.ocrText, ocrText)) &&
@@ -149,7 +128,6 @@ class _$_ScannerResultDto implements _ScannerResultDto {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(scannerStatus) ^
       const DeepCollectionEquality().hash(ocrText) ^
       const DeepCollectionEquality().hash(filePath);
 
@@ -165,15 +143,12 @@ class _$_ScannerResultDto implements _ScannerResultDto {
 
 abstract class _ScannerResultDto implements ScannerResultDto {
   factory _ScannerResultDto(
-      {@required ScannerStatus scannerStatus,
-      @required String ocrText,
+      {@required String ocrText,
       @required String filePath}) = _$_ScannerResultDto;
 
   factory _ScannerResultDto.fromJson(Map<String, dynamic> json) =
       _$_ScannerResultDto.fromJson;
 
-  @override
-  ScannerStatus get scannerStatus;
   @override
   String get ocrText;
   @override

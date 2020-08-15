@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 
 public class SwiftFlutterVisionScannerPlugin: NSObject, FlutterPlugin {
-    var scannerContrlller:VisionScannerController?
+    let scannerContrlller:DocumentPickerController = DocumentPickerController()
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "flutter_vision_scanner", binaryMessenger: registrar.messenger())
         let instance = SwiftFlutterVisionScannerPlugin()
@@ -11,8 +11,7 @@ public class SwiftFlutterVisionScannerPlugin: NSObject, FlutterPlugin {
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         let scannerResult = ScannerResult(runtimeType: .success, filePath: "path", ocrText: "text");
-        scannerContrlller = VisionScannerController()
-        scannerContrlller?.pickImage{ response in
+        scannerContrlller.pickDocument{ response in
             switch(response){
             case .success(let url):
                 print(url)

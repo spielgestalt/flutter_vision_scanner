@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   final _scanner = FlutterVisionScanner();
   String _errorMessage;
   String _filePath;
-
+  ScannerStatus _scannerStatus;
   //Future<ScannerResult> scannerResult;
   @override
   Widget build(BuildContext context) {

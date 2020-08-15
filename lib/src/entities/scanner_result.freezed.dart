@@ -13,8 +13,12 @@ class _$ScannerResultTearOff {
   const _$ScannerResultTearOff();
 
 // ignore: unused_element
-  _ScannerResult call({@required String filePath, String ocrResults}) {
+  _ScannerResult call(
+      {@required ScannerStatus scannerStatus,
+      @required String filePath,
+      String ocrResults}) {
     return _ScannerResult(
+      scannerStatus: scannerStatus,
       filePath: filePath,
       ocrResults: ocrResults,
     );
@@ -25,6 +29,7 @@ class _$ScannerResultTearOff {
 const $ScannerResult = _$ScannerResultTearOff();
 
 mixin _$ScannerResult {
+  ScannerStatus get scannerStatus;
   String get filePath;
   String get ocrResults;
 
@@ -35,7 +40,7 @@ abstract class $ScannerResultCopyWith<$Res> {
   factory $ScannerResultCopyWith(
           ScannerResult value, $Res Function(ScannerResult) then) =
       _$ScannerResultCopyWithImpl<$Res>;
-  $Res call({String filePath, String ocrResults});
+  $Res call({ScannerStatus scannerStatus, String filePath, String ocrResults});
 }
 
 class _$ScannerResultCopyWithImpl<$Res>
@@ -48,10 +53,14 @@ class _$ScannerResultCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object scannerStatus = freezed,
     Object filePath = freezed,
     Object ocrResults = freezed,
   }) {
     return _then(_value.copyWith(
+      scannerStatus: scannerStatus == freezed
+          ? _value.scannerStatus
+          : scannerStatus as ScannerStatus,
       filePath: filePath == freezed ? _value.filePath : filePath as String,
       ocrResults:
           ocrResults == freezed ? _value.ocrResults : ocrResults as String,
@@ -65,7 +74,7 @@ abstract class _$ScannerResultCopyWith<$Res>
           _ScannerResult value, $Res Function(_ScannerResult) then) =
       __$ScannerResultCopyWithImpl<$Res>;
   @override
-  $Res call({String filePath, String ocrResults});
+  $Res call({ScannerStatus scannerStatus, String filePath, String ocrResults});
 }
 
 class __$ScannerResultCopyWithImpl<$Res>
@@ -80,10 +89,14 @@ class __$ScannerResultCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object scannerStatus = freezed,
     Object filePath = freezed,
     Object ocrResults = freezed,
   }) {
     return _then(_ScannerResult(
+      scannerStatus: scannerStatus == freezed
+          ? _value.scannerStatus
+          : scannerStatus as ScannerStatus,
       filePath: filePath == freezed ? _value.filePath : filePath as String,
       ocrResults:
           ocrResults == freezed ? _value.ocrResults : ocrResults as String,
@@ -92,9 +105,13 @@ class __$ScannerResultCopyWithImpl<$Res>
 }
 
 class _$_ScannerResult implements _ScannerResult {
-  _$_ScannerResult({@required this.filePath, this.ocrResults})
-      : assert(filePath != null);
+  _$_ScannerResult(
+      {@required this.scannerStatus, @required this.filePath, this.ocrResults})
+      : assert(scannerStatus != null),
+        assert(filePath != null);
 
+  @override
+  final ScannerStatus scannerStatus;
   @override
   final String filePath;
   @override
@@ -102,13 +119,16 @@ class _$_ScannerResult implements _ScannerResult {
 
   @override
   String toString() {
-    return 'ScannerResult(filePath: $filePath, ocrResults: $ocrResults)';
+    return 'ScannerResult(scannerStatus: $scannerStatus, filePath: $filePath, ocrResults: $ocrResults)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ScannerResult &&
+            (identical(other.scannerStatus, scannerStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.scannerStatus, scannerStatus)) &&
             (identical(other.filePath, filePath) ||
                 const DeepCollectionEquality()
                     .equals(other.filePath, filePath)) &&
@@ -120,6 +140,7 @@ class _$_ScannerResult implements _ScannerResult {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(scannerStatus) ^
       const DeepCollectionEquality().hash(filePath) ^
       const DeepCollectionEquality().hash(ocrResults);
 
@@ -129,9 +150,13 @@ class _$_ScannerResult implements _ScannerResult {
 }
 
 abstract class _ScannerResult implements ScannerResult {
-  factory _ScannerResult({@required String filePath, String ocrResults}) =
-      _$_ScannerResult;
+  factory _ScannerResult(
+      {@required ScannerStatus scannerStatus,
+      @required String filePath,
+      String ocrResults}) = _$_ScannerResult;
 
+  @override
+  ScannerStatus get scannerStatus;
   @override
   String get filePath;
   @override

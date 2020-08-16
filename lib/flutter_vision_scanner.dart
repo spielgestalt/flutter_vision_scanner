@@ -20,8 +20,11 @@ class FlutterVisionScanner {
           const ScannerOptions(mode: ScannerMode.withOcr)}) async {
     try {
       final result = await _scanner.scan(options);
-      return ScannerResult.success(
-          filePath: result.filePath, ocrResults: result.ocrText);
+      return result.map(
+          success: (success) =>
+              ScannerResult.success(filePath: success.filePath),
+          failure: (failure) => ScannerResult.failure(
+              code: failure.code, message: failure.message));
     } catch (e) {
       //throw ScannerException(e.toString());
       throw ScannerException('$e');

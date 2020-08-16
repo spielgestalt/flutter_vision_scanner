@@ -13,7 +13,8 @@ class _$ScannerResultTearOff {
   const _$ScannerResultTearOff();
 
 // ignore: unused_element
-  ScannerSuccess success({@required String filePath, String ocrResults}) {
+  ScannerSuccess success(
+      {@required String filePath, @nullable String ocrResults}) {
     return ScannerSuccess(
       filePath: filePath,
       ocrResults: ocrResults,
@@ -21,7 +22,7 @@ class _$ScannerResultTearOff {
   }
 
 // ignore: unused_element
-  ScannerFailure failure({@required String code, String message}) {
+  ScannerFailure failure({@required String code, @required String message}) {
     return ScannerFailure(
       code: code,
       message: message,
@@ -35,12 +36,12 @@ const $ScannerResult = _$ScannerResultTearOff();
 mixin _$ScannerResult {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String filePath, String ocrResults),
+    @required Result success(String filePath, @nullable String ocrResults),
     @required Result failure(String code, String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String filePath, String ocrResults),
+    Result success(String filePath, @nullable String ocrResults),
     Result failure(String code, String message),
     @required Result orElse(),
   });
@@ -76,7 +77,7 @@ abstract class $ScannerSuccessCopyWith<$Res> {
   factory $ScannerSuccessCopyWith(
           ScannerSuccess value, $Res Function(ScannerSuccess) then) =
       _$ScannerSuccessCopyWithImpl<$Res>;
-  $Res call({String filePath, String ocrResults});
+  $Res call({String filePath, @nullable String ocrResults});
 }
 
 class _$ScannerSuccessCopyWithImpl<$Res>
@@ -103,12 +104,13 @@ class _$ScannerSuccessCopyWithImpl<$Res>
 }
 
 class _$ScannerSuccess implements ScannerSuccess {
-  _$ScannerSuccess({@required this.filePath, this.ocrResults})
+  _$ScannerSuccess({@required this.filePath, @nullable this.ocrResults})
       : assert(filePath != null);
 
   @override
   final String filePath;
   @override
+  @nullable
   final String ocrResults;
 
   @override
@@ -141,7 +143,7 @@ class _$ScannerSuccess implements ScannerSuccess {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String filePath, String ocrResults),
+    @required Result success(String filePath, @nullable String ocrResults),
     @required Result failure(String code, String message),
   }) {
     assert(success != null);
@@ -152,7 +154,7 @@ class _$ScannerSuccess implements ScannerSuccess {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String filePath, String ocrResults),
+    Result success(String filePath, @nullable String ocrResults),
     Result failure(String code, String message),
     @required Result orElse(),
   }) {
@@ -190,10 +192,12 @@ class _$ScannerSuccess implements ScannerSuccess {
 }
 
 abstract class ScannerSuccess implements ScannerResult {
-  factory ScannerSuccess({@required String filePath, String ocrResults}) =
-      _$ScannerSuccess;
+  factory ScannerSuccess(
+      {@required String filePath,
+      @nullable String ocrResults}) = _$ScannerSuccess;
 
   String get filePath;
+  @nullable
   String get ocrResults;
   $ScannerSuccessCopyWith<ScannerSuccess> get copyWith;
 }
@@ -228,7 +232,9 @@ class _$ScannerFailureCopyWithImpl<$Res>
 }
 
 class _$ScannerFailure implements ScannerFailure {
-  _$ScannerFailure({@required this.code, this.message}) : assert(code != null);
+  _$ScannerFailure({@required this.code, @required this.message})
+      : assert(code != null),
+        assert(message != null);
 
   @override
   final String code;
@@ -263,7 +269,7 @@ class _$ScannerFailure implements ScannerFailure {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String filePath, String ocrResults),
+    @required Result success(String filePath, @nullable String ocrResults),
     @required Result failure(String code, String message),
   }) {
     assert(success != null);
@@ -274,7 +280,7 @@ class _$ScannerFailure implements ScannerFailure {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String filePath, String ocrResults),
+    Result success(String filePath, @nullable String ocrResults),
     Result failure(String code, String message),
     @required Result orElse(),
   }) {
@@ -312,7 +318,7 @@ class _$ScannerFailure implements ScannerFailure {
 }
 
 abstract class ScannerFailure implements ScannerResult {
-  factory ScannerFailure({@required String code, String message}) =
+  factory ScannerFailure({@required String code, @required String message}) =
       _$ScannerFailure;
 
   String get code;

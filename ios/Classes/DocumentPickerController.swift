@@ -15,7 +15,6 @@ class DocumentPickerController:NSObject, VNDocumentCameraViewControllerDelegate{
     func pickDocument(completionHandler: @escaping PickerHandler){
         self.pickerHandler = completionHandler
         self.viewControllerWithWindow(window: nil)?.present(self.scannerViewController!, animated:true)
-        //self.pickerHandler(.failure(ScannerFailures.simulator))
     }
 
     private func viewControllerWithWindow(window:UIWindow?) ->UIViewController?{
@@ -40,9 +39,14 @@ class DocumentPickerController:NSObject, VNDocumentCameraViewControllerDelegate{
         scannerViewController = SimulatorScannerController(){ action in
             switch(action){
             case .cancel:
+                if let handler = self.pickerHandler{
+                    handler(.failure(ScannerFailures.canceled))
+                }
                 print("Canceled")
             case .picked(url: let url):
-                print("picked:\(url.absoluteString)")
+                if let handler = self.pickerHandler{
+                    handler(.success(url))
+                }
             }
         }
         #else

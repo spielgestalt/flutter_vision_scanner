@@ -7,7 +7,9 @@ enum ScannerMode { withOcr, withoutOcr }
 
 @freezed
 abstract class ScannerOptions with _$ScannerOptions {
-  const factory ScannerOptions({@required ScannerMode mode}) = _ScannerOptions;
+  const factory ScannerOptions(
+      {@required ScannerMode mode,
+      String simulatorImagePath}) = _ScannerOptions;
   factory ScannerOptions.fromJson(Map<String, dynamic> json) =>
       _$ScannerOptionsFromJson(json);
 }

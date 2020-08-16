@@ -21,8 +21,8 @@ class FlutterVisionScanner {
     try {
       final result = await _scanner.scan(options);
       return result.map(
-          success: (success) =>
-              ScannerResult.success(filePath: success.filePath),
+          success: (success) => ScannerResult.success(
+              filePath: success.filePath, ocrText: success.ocrText),
           failure: (failure) => ScannerResult.failure(
               code: failure.code, message: failure.message));
     } catch (e) {

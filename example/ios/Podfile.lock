@@ -2,20 +2,26 @@ PODS:
   - Flutter (1.0.0)
   - flutter_vision_scanner (0.0.1):
     - Flutter
+  - ios_platform_images (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_vision_scanner (from `.symlinks/plugins/flutter_vision_scanner/ios`)
+  - ios_platform_images (from `.symlinks/plugins/ios_platform_images/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   flutter_vision_scanner:
     :path: ".symlinks/plugins/flutter_vision_scanner/ios"
+  ios_platform_images:
+    :path: ".symlinks/plugins/ios_platform_images/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_vision_scanner: 008db7dc94f8c8ffd96232adce13162cea3c27e8
+  ios_platform_images: 8dea35d2db257ac6a4cda1ef5dda433cd5dd7ec0
 
 PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 

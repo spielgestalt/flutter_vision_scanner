@@ -14,10 +14,10 @@ class _$ScannerResultTearOff {
 
 // ignore: unused_element
   ScannerSuccess success(
-      {@required String filePath, @nullable String ocrResults}) {
+      {@required String filePath, @required String ocrText}) {
     return ScannerSuccess(
       filePath: filePath,
-      ocrResults: ocrResults,
+      ocrText: ocrText,
     );
   }
 
@@ -36,12 +36,12 @@ const $ScannerResult = _$ScannerResultTearOff();
 mixin _$ScannerResult {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String filePath, @nullable String ocrResults),
+    @required Result success(String filePath, String ocrText),
     @required Result failure(String code, String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String filePath, @nullable String ocrResults),
+    Result success(String filePath, String ocrText),
     Result failure(String code, String message),
     @required Result orElse(),
   });
@@ -77,7 +77,7 @@ abstract class $ScannerSuccessCopyWith<$Res> {
   factory $ScannerSuccessCopyWith(
           ScannerSuccess value, $Res Function(ScannerSuccess) then) =
       _$ScannerSuccessCopyWithImpl<$Res>;
-  $Res call({String filePath, @nullable String ocrResults});
+  $Res call({String filePath, String ocrText});
 }
 
 class _$ScannerSuccessCopyWithImpl<$Res>
@@ -93,29 +93,28 @@ class _$ScannerSuccessCopyWithImpl<$Res>
   @override
   $Res call({
     Object filePath = freezed,
-    Object ocrResults = freezed,
+    Object ocrText = freezed,
   }) {
     return _then(ScannerSuccess(
       filePath: filePath == freezed ? _value.filePath : filePath as String,
-      ocrResults:
-          ocrResults == freezed ? _value.ocrResults : ocrResults as String,
+      ocrText: ocrText == freezed ? _value.ocrText : ocrText as String,
     ));
   }
 }
 
 class _$ScannerSuccess implements ScannerSuccess {
-  _$ScannerSuccess({@required this.filePath, @nullable this.ocrResults})
-      : assert(filePath != null);
+  _$ScannerSuccess({@required this.filePath, @required this.ocrText})
+      : assert(filePath != null),
+        assert(ocrText != null);
 
   @override
   final String filePath;
   @override
-  @nullable
-  final String ocrResults;
+  final String ocrText;
 
   @override
   String toString() {
-    return 'ScannerResult.success(filePath: $filePath, ocrResults: $ocrResults)';
+    return 'ScannerResult.success(filePath: $filePath, ocrText: $ocrText)';
   }
 
   @override
@@ -125,16 +124,15 @@ class _$ScannerSuccess implements ScannerSuccess {
             (identical(other.filePath, filePath) ||
                 const DeepCollectionEquality()
                     .equals(other.filePath, filePath)) &&
-            (identical(other.ocrResults, ocrResults) ||
-                const DeepCollectionEquality()
-                    .equals(other.ocrResults, ocrResults)));
+            (identical(other.ocrText, ocrText) ||
+                const DeepCollectionEquality().equals(other.ocrText, ocrText)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(filePath) ^
-      const DeepCollectionEquality().hash(ocrResults);
+      const DeepCollectionEquality().hash(ocrText);
 
   @override
   $ScannerSuccessCopyWith<ScannerSuccess> get copyWith =>
@@ -143,24 +141,24 @@ class _$ScannerSuccess implements ScannerSuccess {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String filePath, @nullable String ocrResults),
+    @required Result success(String filePath, String ocrText),
     @required Result failure(String code, String message),
   }) {
     assert(success != null);
     assert(failure != null);
-    return success(filePath, ocrResults);
+    return success(filePath, ocrText);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String filePath, @nullable String ocrResults),
+    Result success(String filePath, String ocrText),
     Result failure(String code, String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (success != null) {
-      return success(filePath, ocrResults);
+      return success(filePath, ocrText);
     }
     return orElse();
   }
@@ -193,12 +191,10 @@ class _$ScannerSuccess implements ScannerSuccess {
 
 abstract class ScannerSuccess implements ScannerResult {
   factory ScannerSuccess(
-      {@required String filePath,
-      @nullable String ocrResults}) = _$ScannerSuccess;
+      {@required String filePath, @required String ocrText}) = _$ScannerSuccess;
 
   String get filePath;
-  @nullable
-  String get ocrResults;
+  String get ocrText;
   $ScannerSuccessCopyWith<ScannerSuccess> get copyWith;
 }
 
@@ -269,7 +265,7 @@ class _$ScannerFailure implements ScannerFailure {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String filePath, @nullable String ocrResults),
+    @required Result success(String filePath, String ocrText),
     @required Result failure(String code, String message),
   }) {
     assert(success != null);
@@ -280,7 +276,7 @@ class _$ScannerFailure implements ScannerFailure {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String filePath, @nullable String ocrResults),
+    Result success(String filePath, String ocrText),
     Result failure(String code, String message),
     @required Result orElse(),
   }) {

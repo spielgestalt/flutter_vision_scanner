@@ -249,6 +249,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.4"
+  ios_platform_images:
+    dependency: "direct main"
+    description:
+      name: ios_platform_images
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2+2"
   js:
     dependency: transitive
     description:

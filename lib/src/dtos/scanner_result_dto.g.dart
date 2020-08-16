@@ -9,16 +9,16 @@ part of 'scanner_result_dto.dart';
 _$_ScannerResultDtoSuccess _$_$_ScannerResultDtoSuccessFromJson(
     Map<String, dynamic> json) {
   return _$_ScannerResultDtoSuccess(
-    ocrText: json['ocrText'] as String,
     filePath: json['filePath'] as String,
+    ocrText: json['ocrText'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_ScannerResultDtoSuccessToJson(
         _$_ScannerResultDtoSuccess instance) =>
     <String, dynamic>{
-      'ocrText': instance.ocrText,
       'filePath': instance.filePath,
+      'ocrText': instance.ocrText,
     };
 
 _$_ScannerResultDtoFailure _$_$_ScannerResultDtoFailureFromJson(

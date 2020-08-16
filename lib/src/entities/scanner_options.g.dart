@@ -9,12 +9,14 @@ part of 'scanner_options.dart';
 _$_ScannerOptions _$_$_ScannerOptionsFromJson(Map<String, dynamic> json) {
   return _$_ScannerOptions(
     mode: _$enumDecodeNullable(_$ScannerModeEnumMap, json['mode']),
+    simulatorImagePath: json['simulatorImagePath'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_ScannerOptionsToJson(_$_ScannerOptions instance) =>
     <String, dynamic>{
       'mode': _$ScannerModeEnumMap[instance.mode],
+      'simulatorImagePath': instance.simulatorImagePath,
     };
 
 T _$enumDecode<T>(

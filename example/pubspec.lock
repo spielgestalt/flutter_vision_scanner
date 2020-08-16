@@ -81,6 +81,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.11.0+1"
+  ios_platform_images:
+    dependency: transitive
+    description:
+      name: ios_platform_images
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2+2"
   json_annotation:
     dependency: transitive
     description:

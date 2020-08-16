@@ -6,9 +6,10 @@ typealias PickerHandler = (Result<URL, ScannerFailures>) -> Void
 
 class DocumentPickerController:NSObject, VNDocumentCameraViewControllerDelegate{
     var scannerViewController:UIViewController?
+    var options: ScannerOptions!
     var pickerHandler: PickerHandler!
-
-    override init() {
+    init(options:ScannerOptions) {
+        self.options = options
         super.init()
         setupVision()
     }
@@ -36,7 +37,8 @@ class DocumentPickerController:NSObject, VNDocumentCameraViewControllerDelegate{
     }
     private func setupVision() {
         #if targetEnvironment(simulator)
-        scannerViewController = SimulatorScannerController(){ action in
+        scannerViewController = SimulatorScannerController(options: options!
+            ){ action in
             switch(action){
             case .cancel:
                 if let handler = self.pickerHandler{

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_vision_scanner/flutter_vision_scanner.dart';
 
@@ -16,6 +18,8 @@ class _MyAppState extends State<MyApp> {
   final _scanner = FlutterVisionScanner();
   String _errorMessage;
   String _filePath;
+  String _ocrText;
+  bool _scanning = false;
 
   //Future<ScannerResult> scannerResult;
   @override
@@ -27,29 +31,41 @@ class _MyAppState extends State<MyApp> {
         ),
         body: ListView(
           children: [
-            RaisedButton(
-              onPressed: () async {
-                try {
-                  final scannerResult = await _scanner.scan();
+            if (_scanning == false)
+              RaisedButton(
+                onPressed: () async {
                   setState(() {
-                    scannerResult.map(success: (success) {
-                      _filePath = success.filePath;
-                    }, failure: (failure) {
-                      _errorMessage = failure.message;
+                    _scanning = true;
+                  });
+                  try {
+                    final scannerResult = await _scanner.scan(
+                        options: const ScannerOptions(
+                            simulatorImagePath: "assets/flutter_de.jpg",
+                            mode: ScannerMode.withOcr));
+                    setState(() {
+                      scannerResult.map(success: (success) {
+                        _filePath = success.filePath;
+                        _ocrText = success.ocrText;
+                      }, failure: (failure) {
+                        _errorMessage = failure.message;
+                      });
                     });
-                  });
-                } catch (e) {
+                  } catch (e) {
+                    setState(() {
+                      _errorMessage = '$e';
+                    });
+                  }
                   setState(() {
-                    _errorMessage = '$e';
+                    _scanning = false;
                   });
-                }
-
-                //scannerResult = _scanner.scan();
-              },
-              child: const Text('Start scan'),
-            ),
+                },
+                child: const Text('Start scan'),
+              )
+            else
+              const Center(child: CircularProgressIndicator()),
+            if (_ocrText != null) Text(_ocrText),
+            if (_filePath != null) Image.file(File(_filePath)),
             if (_errorMessage != null) Text(_errorMessage),
-            if (_filePath != null) Text(_filePath)
           ],
         ),
       ),

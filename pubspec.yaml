@@ -15,6 +15,7 @@ dependencies:
   freezed_annotation:
   json_annotation:
   lint: ^1.0.0
+  ios_platform_images: ^0.1.2+2
 dependency_overrides:
   analyzer: '0.39.14'  
 dev_dependencies:

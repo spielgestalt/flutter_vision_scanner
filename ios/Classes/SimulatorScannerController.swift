@@ -1,4 +1,6 @@
 import UIKit
+import Flutter
+
 enum SimpleAction{
     case cancel
     case picked(url:URL)
@@ -8,8 +10,10 @@ class SimulatorScannerController : UIViewController{
 
     let vStack = UIStackView()
     var handler: SimpleHandler?
-    init(handler: @escaping SimpleHandler){
+    var  options:ScannerOptions?
+    init( options:ScannerOptions, handler: @escaping SimpleHandler){
         self.handler = handler
+        self.options = options
         super.init(nibName: nil, bundle: nil)
     }
     public required init?(coder aDecoder: NSCoder) {
@@ -17,8 +21,7 @@ class SimulatorScannerController : UIViewController{
         self.handler = nil
     }
     override func viewDidLoad() {
-        super.viewDidLoad()
-
+        super.viewDidLoad()        
         let titleLabel = UILabel()
         let scanButton =  UIButton()
         let cancleButton = UIButton()
@@ -52,6 +55,11 @@ class SimulatorScannerController : UIViewController{
         vStack.addArrangedSubview(cancleButton)
         vStack.addArrangedSubview(footterLable)
         vStack.addArrangedSubview(fillerView)
+        if let simulatorImageKeyPath = options?.simulatorImageKeyPath, let absolutePath = Bundle.main.path(forResource: simulatorImageKeyPath, ofType: nil){
+            let image = UIImage(contentsOfFile: absolutePath)
+            let imageView = UIImageView(image: image)
+            vStack.addArrangedSubview(imageView)
+        }
 
 
     }
@@ -60,7 +68,12 @@ class SimulatorScannerController : UIViewController{
         self.dismiss(animated: true)
     }
     @objc func scanAction(sender: UIButton!) {
-        handler?(.picked(url: URL(string: "pickingfile")!))
+        if let frameworkPath = options?.simulatorImageKeyPath, let absolutePath = Bundle.main.path(forResource: frameworkPath, ofType: nil){
+            handler?(.picked(url: URL(string: absolutePath)!))
+        }else{
+            handler?(.cancel)
+        }
+
         self.dismiss(animated: true)
     }
 }

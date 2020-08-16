@@ -16,9 +16,11 @@ class _$ScannerOptionsTearOff {
   const _$ScannerOptionsTearOff();
 
 // ignore: unused_element
-  _ScannerOptions call({@required ScannerMode mode}) {
+  _ScannerOptions call(
+      {@required ScannerMode mode, String simulatorImagePath}) {
     return _ScannerOptions(
       mode: mode,
+      simulatorImagePath: simulatorImagePath,
     );
   }
 }
@@ -28,6 +30,7 @@ const $ScannerOptions = _$ScannerOptionsTearOff();
 
 mixin _$ScannerOptions {
   ScannerMode get mode;
+  String get simulatorImagePath;
 
   Map<String, dynamic> toJson();
   $ScannerOptionsCopyWith<ScannerOptions> get copyWith;
@@ -37,7 +40,7 @@ abstract class $ScannerOptionsCopyWith<$Res> {
   factory $ScannerOptionsCopyWith(
           ScannerOptions value, $Res Function(ScannerOptions) then) =
       _$ScannerOptionsCopyWithImpl<$Res>;
-  $Res call({ScannerMode mode});
+  $Res call({ScannerMode mode, String simulatorImagePath});
 }
 
 class _$ScannerOptionsCopyWithImpl<$Res>
@@ -51,9 +54,13 @@ class _$ScannerOptionsCopyWithImpl<$Res>
   @override
   $Res call({
     Object mode = freezed,
+    Object simulatorImagePath = freezed,
   }) {
     return _then(_value.copyWith(
       mode: mode == freezed ? _value.mode : mode as ScannerMode,
+      simulatorImagePath: simulatorImagePath == freezed
+          ? _value.simulatorImagePath
+          : simulatorImagePath as String,
     ));
   }
 }
@@ -64,7 +71,7 @@ abstract class _$ScannerOptionsCopyWith<$Res>
           _ScannerOptions value, $Res Function(_ScannerOptions) then) =
       __$ScannerOptionsCopyWithImpl<$Res>;
   @override
-  $Res call({ScannerMode mode});
+  $Res call({ScannerMode mode, String simulatorImagePath});
 }
 
 class __$ScannerOptionsCopyWithImpl<$Res>
@@ -80,26 +87,33 @@ class __$ScannerOptionsCopyWithImpl<$Res>
   @override
   $Res call({
     Object mode = freezed,
+    Object simulatorImagePath = freezed,
   }) {
     return _then(_ScannerOptions(
       mode: mode == freezed ? _value.mode : mode as ScannerMode,
+      simulatorImagePath: simulatorImagePath == freezed
+          ? _value.simulatorImagePath
+          : simulatorImagePath as String,
     ));
   }
 }
 
 @JsonSerializable()
 class _$_ScannerOptions implements _ScannerOptions {
-  const _$_ScannerOptions({@required this.mode}) : assert(mode != null);
+  const _$_ScannerOptions({@required this.mode, this.simulatorImagePath})
+      : assert(mode != null);
 
   factory _$_ScannerOptions.fromJson(Map<String, dynamic> json) =>
       _$_$_ScannerOptionsFromJson(json);
 
   @override
   final ScannerMode mode;
+  @override
+  final String simulatorImagePath;
 
   @override
   String toString() {
-    return 'ScannerOptions(mode: $mode)';
+    return 'ScannerOptions(mode: $mode, simulatorImagePath: $simulatorImagePath)';
   }
 
   @override
@@ -107,12 +121,17 @@ class _$_ScannerOptions implements _ScannerOptions {
     return identical(this, other) ||
         (other is _ScannerOptions &&
             (identical(other.mode, mode) ||
-                const DeepCollectionEquality().equals(other.mode, mode)));
+                const DeepCollectionEquality().equals(other.mode, mode)) &&
+            (identical(other.simulatorImagePath, simulatorImagePath) ||
+                const DeepCollectionEquality()
+                    .equals(other.simulatorImagePath, simulatorImagePath)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(mode);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(mode) ^
+      const DeepCollectionEquality().hash(simulatorImagePath);
 
   @override
   _$ScannerOptionsCopyWith<_ScannerOptions> get copyWith =>
@@ -125,14 +144,17 @@ class _$_ScannerOptions implements _ScannerOptions {
 }
 
 abstract class _ScannerOptions implements ScannerOptions {
-  const factory _ScannerOptions({@required ScannerMode mode}) =
-      _$_ScannerOptions;
+  const factory _ScannerOptions(
+      {@required ScannerMode mode,
+      String simulatorImagePath}) = _$_ScannerOptions;
 
   factory _ScannerOptions.fromJson(Map<String, dynamic> json) =
       _$_ScannerOptions.fromJson;
 
   @override
   ScannerMode get mode;
+  @override
+  String get simulatorImagePath;
   @override
   _$ScannerOptionsCopyWith<_ScannerOptions> get copyWith;
 }

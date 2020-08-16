@@ -5,9 +5,10 @@ part 'scanner_result_dto.g.dart';
 
 @freezed
 abstract class ScannerResultDto with _$ScannerResultDto {
-  factory ScannerResultDto.success(
-      {@required String ocrText,
-      @required String filePath}) = _ScannerResultDtoSuccess;
+  factory ScannerResultDto.success({
+    @required String filePath,
+    @required String ocrText,
+  }) = _ScannerResultDtoSuccess;
   factory ScannerResultDto.failure(
       {@required String code,
       @required String message}) = _ScannerResultDtoFailure;

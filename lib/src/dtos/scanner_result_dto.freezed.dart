@@ -25,10 +25,10 @@ class _$ScannerResultDtoTearOff {
 
 // ignore: unused_element
   _ScannerResultDtoSuccess success(
-      {@required String ocrText, @required String filePath}) {
+      {@required String filePath, @required String ocrText}) {
     return _ScannerResultDtoSuccess(
-      ocrText: ocrText,
       filePath: filePath,
+      ocrText: ocrText,
     );
   }
 
@@ -48,12 +48,12 @@ const $ScannerResultDto = _$ScannerResultDtoTearOff();
 mixin _$ScannerResultDto {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String ocrText, String filePath),
+    @required Result success(String filePath, String ocrText),
     @required Result failure(String code, String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String ocrText, String filePath),
+    Result success(String filePath, String ocrText),
     Result failure(String code, String message),
     @required Result orElse(),
   });
@@ -90,7 +90,7 @@ abstract class _$ScannerResultDtoSuccessCopyWith<$Res> {
   factory _$ScannerResultDtoSuccessCopyWith(_ScannerResultDtoSuccess value,
           $Res Function(_ScannerResultDtoSuccess) then) =
       __$ScannerResultDtoSuccessCopyWithImpl<$Res>;
-  $Res call({String ocrText, String filePath});
+  $Res call({String filePath, String ocrText});
 }
 
 class __$ScannerResultDtoSuccessCopyWithImpl<$Res>
@@ -106,52 +106,51 @@ class __$ScannerResultDtoSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object ocrText = freezed,
     Object filePath = freezed,
+    Object ocrText = freezed,
   }) {
     return _then(_ScannerResultDtoSuccess(
-      ocrText: ocrText == freezed ? _value.ocrText : ocrText as String,
       filePath: filePath == freezed ? _value.filePath : filePath as String,
+      ocrText: ocrText == freezed ? _value.ocrText : ocrText as String,
     ));
   }
 }
 
 @JsonSerializable()
 class _$_ScannerResultDtoSuccess implements _ScannerResultDtoSuccess {
-  _$_ScannerResultDtoSuccess({@required this.ocrText, @required this.filePath})
-      : assert(ocrText != null),
-        assert(filePath != null);
+  _$_ScannerResultDtoSuccess({@required this.filePath, @required this.ocrText})
+      : assert(filePath != null),
+        assert(ocrText != null);
 
   factory _$_ScannerResultDtoSuccess.fromJson(Map<String, dynamic> json) =>
       _$_$_ScannerResultDtoSuccessFromJson(json);
 
   @override
-  final String ocrText;
-  @override
   final String filePath;
+  @override
+  final String ocrText;
 
   @override
   String toString() {
-    return 'ScannerResultDto.success(ocrText: $ocrText, filePath: $filePath)';
+    return 'ScannerResultDto.success(filePath: $filePath, ocrText: $ocrText)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ScannerResultDtoSuccess &&
-            (identical(other.ocrText, ocrText) ||
-                const DeepCollectionEquality()
-                    .equals(other.ocrText, ocrText)) &&
             (identical(other.filePath, filePath) ||
                 const DeepCollectionEquality()
-                    .equals(other.filePath, filePath)));
+                    .equals(other.filePath, filePath)) &&
+            (identical(other.ocrText, ocrText) ||
+                const DeepCollectionEquality().equals(other.ocrText, ocrText)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(ocrText) ^
-      const DeepCollectionEquality().hash(filePath);
+      const DeepCollectionEquality().hash(filePath) ^
+      const DeepCollectionEquality().hash(ocrText);
 
   @override
   _$ScannerResultDtoSuccessCopyWith<_ScannerResultDtoSuccess> get copyWith =>
@@ -161,24 +160,24 @@ class _$_ScannerResultDtoSuccess implements _ScannerResultDtoSuccess {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String ocrText, String filePath),
+    @required Result success(String filePath, String ocrText),
     @required Result failure(String code, String message),
   }) {
     assert(success != null);
     assert(failure != null);
-    return success(ocrText, filePath);
+    return success(filePath, ocrText);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String ocrText, String filePath),
+    Result success(String filePath, String ocrText),
     Result failure(String code, String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (success != null) {
-      return success(ocrText, filePath);
+      return success(filePath, ocrText);
     }
     return orElse();
   }
@@ -217,14 +216,14 @@ class _$_ScannerResultDtoSuccess implements _ScannerResultDtoSuccess {
 
 abstract class _ScannerResultDtoSuccess implements ScannerResultDto {
   factory _ScannerResultDtoSuccess(
-      {@required String ocrText,
-      @required String filePath}) = _$_ScannerResultDtoSuccess;
+      {@required String filePath,
+      @required String ocrText}) = _$_ScannerResultDtoSuccess;
 
   factory _ScannerResultDtoSuccess.fromJson(Map<String, dynamic> json) =
       _$_ScannerResultDtoSuccess.fromJson;
 
-  String get ocrText;
   String get filePath;
+  String get ocrText;
   _$ScannerResultDtoSuccessCopyWith<_ScannerResultDtoSuccess> get copyWith;
 }
 
@@ -301,7 +300,7 @@ class _$_ScannerResultDtoFailure implements _ScannerResultDtoFailure {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result success(String ocrText, String filePath),
+    @required Result success(String filePath, String ocrText),
     @required Result failure(String code, String message),
   }) {
     assert(success != null);
@@ -312,7 +311,7 @@ class _$_ScannerResultDtoFailure implements _ScannerResultDtoFailure {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result success(String ocrText, String filePath),
+    Result success(String filePath, String ocrText),
     Result failure(String code, String message),
     @required Result orElse(),
   }) {
